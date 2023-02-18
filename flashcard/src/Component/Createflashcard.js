@@ -17,23 +17,22 @@ const getDatafromLocalstorage = () => {
 };
 
 const Createflashcard = () => {
-  //main array of objects state used to store all data into local storage
+  
   const [inputFields, setInputFields] = useState(getDatafromLocalstorage());
 
- //initial form value for formik form handle (must)
+ //initial form values
   var initialValues = {
     groupname: "",
     description: "",
     flashterms: [{ term: "", defination: "" }],
   };
 
-  //form submits & capture input data using onsubmit function.
+  //Submit data by onSubmit.
   const onSubmit = (values, action) => {
     setInputFields([...inputFields, { id: uuidv4(), ...values }]);
     action.resetForm();
   };
-
-  //calls every time the component renders and stote inputfield data into local storage
+  // component renders and store data into local storage.
   useEffect(() => {
     localStorage.setItem("MyFlashCard", JSON.stringify(inputFields));
   }, [inputFields]);
